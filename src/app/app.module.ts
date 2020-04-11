@@ -37,6 +37,10 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+
+import { AuthGuard } from './auth-guard';
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -67,9 +71,10 @@ import {MatSelectModule} from '@angular/material/select';
     NewRepoServerComponent,
     EditRepoServerComponent,
     ShowRepoServerComponent,
+    LoginComponent,
 
   ],
-  providers: [UpgradeComponent],
+  providers: [AuthGuard, UpgradeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

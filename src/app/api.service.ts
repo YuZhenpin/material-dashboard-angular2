@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
+import { User } from './user';
 import { Build } from './build';
 import { Pipeline } from './pipeline';
 import { RepoServer } from './repo-server';
@@ -27,6 +28,21 @@ export class ApiService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  login(user: User): Observable<boolean> {
+    const url = this.getUrl('login');
+    return this.http.post<{token: string}>(url, user)
+      .pipe(
+        map(result => {
+          localStorage.setItem('access_token', result.token);
+          return true;
+        })
+      );
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
   }
 
   getBuilds(): Observable<Build[]> {

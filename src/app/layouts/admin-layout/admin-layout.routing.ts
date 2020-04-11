@@ -19,6 +19,9 @@ import { ListRepoServersComponent} from '../../repo-server/list-repo-servers/lis
 import { NewRepoServerComponent } from '../../repo-server/new-repo-server/new-repo-server.component';
 import { EditRepoServerComponent } from '../../repo-server/edit-repo-server/edit-repo-server.component';
 
+import { AuthGuard } from '../../auth-guard';
+import { LoginComponent } from '../../login/login.component';
+
 export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
@@ -62,14 +65,16 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'builds',                   component: ListBuildsComponent },
-    { path: 'pipelines',                component: ListPipelinesComponent },
-    { path: 'pipelines/new',            component: NewPipelineComponent },
-    { path: 'pipelines/:id/edit',       component: EditPipelineComponent },
-    { path: 'repo-servers',             component: ListRepoServersComponent },
-    { path: 'repo-servers/new',         component: NewRepoServerComponent },
-    { path: 'repo-servers/:id/edit',    component: EditRepoServerComponent },
-    { path: 'dashboard',                component: DashboardComponent },
+    { path: 'login',                    component: LoginComponent },
+    { path: 'builds',                   component: ListBuildsComponent, canActivate: [AuthGuard]  },
+    { path: 'pipelines',                component: ListPipelinesComponent, canActivate: [AuthGuard] },
+    { path: 'pipelines',                component: ListPipelinesComponent, canActivate: [AuthGuard]  },
+    { path: 'pipelines/new',            component: NewPipelineComponent, canActivate: [AuthGuard]  },
+    { path: 'pipelines/:id/edit',       component: EditPipelineComponent, canActivate: [AuthGuard]  },
+    { path: 'repo-servers',             component: ListRepoServersComponent, canActivate: [AuthGuard]  },
+    { path: 'repo-servers/new',         component: NewRepoServerComponent , canActivate: [AuthGuard] },
+    { path: 'repo-servers/:id/edit',    component: EditRepoServerComponent, canActivate: [AuthGuard]  },
+    { path: 'dashboard',                component: DashboardComponent, canActivate: [AuthGuard]  },
     { path: 'user-profile',             component: UserProfileComponent },
     { path: 'table-list',               component: TableListComponent },
     { path: 'typography',               component: TypographyComponent },
