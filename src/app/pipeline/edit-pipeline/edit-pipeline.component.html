@@ -8,7 +8,7 @@
                         <p class="card-category">Complete your profile</p>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form *ngIf="pipeline">
                             <div class="row">
                                 <div class="col-md-5">
                                   <mat-form-field class="example-full-width">
@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Username">
+                                      <input matInput value="{{pipeline.name}}" (input)='onNameChanged($event)' placeholder="Name">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
@@ -77,8 +77,8 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Delete</button>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <button mat-raised-button type="submit" (click)="onDelete()" class="btn btn-danger pull-right">Delete</button>
+                            <button mat-raised-button type="submit" (click)="onSubmit()" class="btn btn-danger pull-right">Save</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

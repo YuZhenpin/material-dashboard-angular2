@@ -30,7 +30,8 @@ export class ApiService {
   }
 
   getBuilds(): Observable<Build[]> {
-    return this.http.get<Build[]>(`${apiUrl}/builds`)
+    const url = this.getUrl('builds');
+    return this.http.get<Build[]>(url)
       .pipe(
         tap(builds => console.log('fetched builds')),
         catchError(this.handleError('getBuilds', []))
@@ -38,15 +39,16 @@ export class ApiService {
   }
 
   getPipelines(): Observable<Pipeline[]> {
-    return this.http.get<Pipeline[]>(`${apiUrl}/builds`)
+    const url = this.getUrl('pipelines');
+    return this.http.get<Pipeline[]>(url)
       .pipe(
         tap(pipelines => console.log('fetched pipelines')),
         catchError(this.handleError('getPipelines', []))
       );
   }
 
-  getPipelineById(id: string): Observable<Pipeline> {
-    const url = `${apiUrl}/${id}`;
+  getPipelineById(id: number): Observable<Pipeline> {
+    const url = this.getUrl(`pipelines/${id}`);
     return this.http.get<Pipeline>(url).pipe(
       tap(_ => console.log(`fetched pipeline id=${id}`)),
       catchError(this.handleError<Pipeline>(`getPipelineById id=${id}`))
@@ -54,22 +56,23 @@ export class ApiService {
   }
 
   addPipeline(pipeline: Pipeline): Observable<Pipeline> {
-    return this.http.post<Pipeline>(apiUrl, pipeline, httpOptions).pipe(
+    const url = this.getUrl(`pipelines`);
+    return this.http.post<Pipeline>(url, pipeline, httpOptions).pipe(
       tap((c: Pipeline) => console.log(`added pipeline w/ id=${c.id}`)),
       catchError(this.handleError<Pipeline>('addPipeline'))
     );
   }
 
-  updatePipeline(id: string, pipeline: Pipeline): Observable<any> {
-    const url = `${apiUrl}/${id}`;
+  updatePipeline(id: number, pipeline: Pipeline): Observable<any> {
+    const url = this.getUrl(`pipelines/${id}`);
     return this.http.put(url, pipeline, httpOptions).pipe(
       tap(_ => console.log(`updated pipeline id=${id}`)),
       catchError(this.handleError<any>('updatePipeline'))
     );
   }
 
-  deletePipeline(id: string): Observable<Pipeline> {
-    const url = `${apiUrl}/${id}`;
+  deletePipeline(id: number): Observable<Pipeline> {
+    const url = this.getUrl(`pipelines/${id}`);
     return this.http.delete<Pipeline>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted pipeline id=${id}`)),
       catchError(this.handleError<Pipeline>('deletePipeline'))
@@ -78,15 +81,16 @@ export class ApiService {
 
 
   getRepoServers(): Observable<RepoServer[]> {
-    return this.http.get<RepoServer[]>(`${apiUrl}/builds`)
+    const url = this.getUrl(`repo_servers`);
+    return this.http.get<RepoServer[]>(url)
       .pipe(
         tap(repoServer => console.log('fetched repo servers')),
         catchError(this.handleError('getRepoServers', []))
       );
   }
 
-  getRepoServerById(id: string): Observable<RepoServer> {
-    const url = `${apiUrl}/${id}`;
+  getRepoServerById(id: number): Observable<RepoServer> {
+    const url = this.getUrl(`repo_servers/${id}`);
     return this.http.get<RepoServer>(url).pipe(
       tap(_ => console.log(`fetched repo server id=${id}`)),
       catchError(this.handleError<RepoServer>(`getRepoServerById id=${id}`))
@@ -94,26 +98,31 @@ export class ApiService {
   }
 
   addRepoServer(repoServer: RepoServer): Observable<RepoServer> {
-    return this.http.post<RepoServer>(apiUrl, repoServer, httpOptions).pipe(
+    const url = this.getUrl(`repo_servers`);
+    return this.http.post<RepoServer>(url, repoServer, httpOptions).pipe(
       tap((c: Pipeline) => console.log(`added repo server w/ id=${c.id}`)),
       catchError(this.handleError<RepoServer>('addRepoServer'))
     );
   }
 
-  updateRepoServer(id: string, repoServer: RepoServer): Observable<any> {
-    const url = `${apiUrl}/${id}`;
+  updateRepoServer(id: number, repoServer: RepoServer): Observable<any> {
+    const url = this.getUrl(`repo_servers/${id}`);
     return this.http.put(url, repoServer, httpOptions).pipe(
       tap(_ => console.log(`updated repo server id=${id}`)),
       catchError(this.handleError<any>('updateRepoServer'))
     );
   }
 
-  deleteRepoServer(id: string): Observable<RepoServer> {
-    const url = `${apiUrl}/${id}`;
+  deleteRepoServer(id: number): Observable<RepoServer> {
+    const url = this.getUrl(`repo_servers/${id}`);
     return this.http.delete<RepoServer>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted repo server id=${id}`)),
       catchError(this.handleError<RepoServer>('deleteRepoServer'))
     );
+  }
+
+  private getUrl(path: string) {
+    return `${apiUrl}/${path}`;
   }
 
   /*
