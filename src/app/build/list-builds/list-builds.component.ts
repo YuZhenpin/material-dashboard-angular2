@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
-import { Build } from '../build';
+import { ApiService } from '../../api.service';
+import { Build } from '../../build';
 
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css']
+  selector: 'app-list-builds',
+  templateUrl: './list-builds.component.html',
+  styleUrls: ['./list-builds.component.css']
 })
-export class TableListComponent implements OnInit {
+export class ListBuildsComponent implements OnInit {
+
   builds: Build[] = [];
   isLoadingResults = true;
 

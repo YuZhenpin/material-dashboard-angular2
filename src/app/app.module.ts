@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
+import { HttpClientModule, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -22,6 +22,15 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ListBuildsComponent } from './build/list-builds/list-builds.component';
+import { ListRepoServersComponent } from './repo-server/list-repo-servers/list-repo-servers.component';
+import { ListPipelinesComponent } from './pipeline/list-pipelines/list-pipelines.component';
+import { NewPipelineComponent } from './pipeline/new-pipeline/new-pipeline.component';
+import { EditPipelineComponent } from './pipeline/edit-pipeline/edit-pipeline.component';
+import { ShowPipelineComponent } from './pipeline/show-pipeline/show-pipeline.component';
+import { NewRepoServerComponent } from './repo-server/new-repo-server/new-repo-server.component';
+import { EditRepoServerComponent } from './repo-server/edit-repo-server/edit-repo-server.component';
+import { ShowRepoServerComponent } from './repo-server/show-repo-server/show-repo-server.component';
 
 @NgModule({
   imports: [
@@ -29,6 +38,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
@@ -39,9 +49,18 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    ListBuildsComponent,
+    ListRepoServersComponent,
+    ListPipelinesComponent,
+    NewPipelineComponent,
+    EditPipelineComponent,
+    ShowPipelineComponent,
+    NewRepoServerComponent,
+    EditRepoServerComponent,
+    ShowRepoServerComponent,
 
   ],
-  providers: [],
+  providers: [UpgradeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
