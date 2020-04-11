@@ -31,7 +31,12 @@ import { ShowPipelineComponent } from './pipeline/show-pipeline/show-pipeline.co
 import { NewRepoServerComponent } from './repo-server/new-repo-server/new-repo-server.component';
 import { EditRepoServerComponent } from './repo-server/edit-repo-server/edit-repo-server.component';
 import { ShowRepoServerComponent } from './repo-server/show-repo-server/show-repo-server.component';
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatRippleModule} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -42,6 +47,10 @@ import { ShowRepoServerComponent } from './repo-server/show-repo-server/show-rep
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })

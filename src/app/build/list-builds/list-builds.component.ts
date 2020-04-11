@@ -15,12 +15,9 @@ export class ListBuildsComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-      console.log("000")
     this.api.getBuilds()
     .subscribe((res: any) => {
-      console.log("111")
       this.builds = res;
-      console.log(this.builds);
       this.isLoadingResults = false;
     }, err => {
       console.log(err);
