@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from '../api.service';
 import { User } from '../user';
 
@@ -10,7 +11,7 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
 
   user: User = new User();
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   onLogin() {
     this.api.login(this.user)
       .subscribe((res: any) => {
+        this.router.navigate(["/"]);
     }, err => {
       console.log(err);
     });

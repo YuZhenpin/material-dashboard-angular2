@@ -40,10 +40,10 @@ export class EditPipelineComponent implements OnInit {
     if (confirm("Are you sure to delete " + this.pipeline.name)) {
       this.api.deletePipeline(this.id)
         .subscribe((res: any) => {
+        this.router.navigate(["/pipelines"])
       }, err => {
         console.log(err);
       });
-      this.router.navigate(["/pipelines"])
     }
   }
 }
