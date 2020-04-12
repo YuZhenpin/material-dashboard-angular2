@@ -49,8 +49,8 @@
                                         Salary
                                     </th>
                                 </thead>
-                                <tbody>
-                                    <tr *ngFor="let pipeline of pipelines">
+                                <tbody *ngIf="pager">
+                                    <tr *ngFor="let pipeline of pager.pipelines">
                                         <td ngDefaultControl [(ngModel)]="pipeline.id">
                                             {{pipeline.id}}
                                         </td>
@@ -133,6 +133,26 @@
                     </div>
                 </div>
             </div>
+
+            <ul *ngIf="pager" class="pagination">
+                <a class="nav-link" *ngIf="!isFirstPage()"
+                    routerLink="/pipelines" [queryParams]="pageQueryParams(1)">
+                    <i class="material-icons">first_page</i>
+                </a> 
+                <a class="nav-link" *ngIf="!isFirstPage()"
+                    routerLink="/pipelines" [queryParams]="pageQueryParams(currentPage - 1)">
+                    <i class="material-icons">chevron_left</i>
+                </a>
+                <input matInput (keypress)="numberOnly($event)">
+                <a class="nav-link" *ngIf="!isLastPage()"
+                    routerLink="/pipelines" [queryParams]="pageQueryParams(currentPage + 1)">
+                    <i class="material-icons">chevron_right</i>
+                </a> 
+                <a class="nav-link" *ngIf="!isLastPage()"
+                    routerLink="/pipelines" [queryParams]="pageQueryParams(totalPages)">
+                    <i class="material-icons">last_page</i>
+                </a> 
+            </ul>
         </div>
     </div>
 </div>

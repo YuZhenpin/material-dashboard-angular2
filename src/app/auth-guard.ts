@@ -4,13 +4,9 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router) {
-        console.log("canActivate??????????")
-     }
+    constructor(private router: Router) { }
     canActivate() {
-        console.log("please login.");
         const logInStatus = localStorage.getItem('access_token');
-        console.log(logInStatus);
         if (logInStatus) {
             return true;
         } else {

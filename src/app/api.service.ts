@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, tap, map } from 'rxjs/operators';
 import { User } from './user';
 import { Build } from './build';
-import { Pipeline } from './pipeline';
+import { Pipeline, PipelinePager } from './pipeline';
 import { RepoServer } from './repo-server';
 
 const httpOptions = {
@@ -54,13 +54,12 @@ export class ApiService {
       );
   }
 
-  getPipelines(): Observable<Pipeline[]> {
+  getPipelines(page: number, pageSize: number): Observable<PipelinePager> {
     const url = this.getUrl('pipelines');
-    return this.http.get<Pipeline[]>(url)
-      .pipe(
-        tap(pipelines => console.log('fetched pipelines')),
-        catchError(this.handleError('getPipelines', []))
-      );
+    return this.http.get<PipelinePager>(url).pipe(
+      tap(_ => console.log(`fetched pipelines`)),
+      catchError(this.handleError<PipelinePager>(`getPipelines`))
+    );
   }
 
   getPipelineById(id: number): Observable<Pipeline> {
