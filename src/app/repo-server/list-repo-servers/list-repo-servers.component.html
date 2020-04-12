@@ -132,5 +132,24 @@
                 </div>
             </div>
         </div>
+        <ul *ngIf="pager" class="pagination">
+            <a class="nav-link" *ngIf="!isFirstPage()"
+                routerLink="/repo-servers" [queryParams]="pageQueryParams(1)">
+                <i class="material-icons">first_page</i>
+            </a> 
+            <a class="nav-link" *ngIf="!isFirstPage()"
+                routerLink="/repo-servers" [queryParams]="pageQueryParams(currentPage - 1)">
+                <i class="material-icons">chevron_left</i>
+            </a>
+            <input matInput (keypress)="numberOnly($event)">
+            <a class="nav-link" *ngIf="!isLastPage()"
+                routerLink="/repo-servers" [queryParams]="pageQueryParams(currentPage + 1)">
+                <i class="material-icons">chevron_right</i>
+            </a> 
+            <a class="nav-link" *ngIf="!isLastPage()"
+                routerLink="/repo-servers" [queryParams]="pageQueryParams(totalPages)">
+                <i class="material-icons">last_page</i>
+            </a> 
+        </ul>
     </div>
 </div>

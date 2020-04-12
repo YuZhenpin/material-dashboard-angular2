@@ -5,7 +5,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { User } from './user';
 import { Build } from './build';
 import { Pipeline, PipelinePager } from './pipeline';
-import { RepoServer } from './repo-server';
+import { RepoServer, RepoServerPager } from './repo-server';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -94,13 +94,12 @@ export class ApiService {
     );
   }
 
-
-  getRepoServers(): Observable<RepoServer[]> {
+  getRepoServers(page: number, pageSize: number): Observable<RepoServerPager> {
     const url = this.getUrl(`repo_servers`);
-    return this.http.get<RepoServer[]>(url)
+    return this.http.get<RepoServerPager>(url)
       .pipe(
         tap(repoServer => console.log('fetched repo servers')),
-        catchError(this.handleError('getRepoServers', []))
+        catchError(this.handleError<RepoServerPager>('getRepoServers'))
       );
   }
 
