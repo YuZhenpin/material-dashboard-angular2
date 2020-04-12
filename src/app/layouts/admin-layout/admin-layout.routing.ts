@@ -21,6 +21,9 @@ import { EditRepoServerComponent } from '../../repo-server/edit-repo-server/edit
 
 import { AuthGuard } from '../../auth-guard';
 import { LoginComponent } from '../../login/login.component';
+import { HelpComponent } from '../../help/help.component';
+import { FaqComponent } from '../../faq/faq.component';
+import { AboutUsComponent } from '../../about-us/about-us.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -76,6 +79,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'repo-servers/:id/edit',    component: EditRepoServerComponent,     canActivate: [AuthGuard] },
     { path: 'dashboard',                component: DashboardComponent,          canActivate: [AuthGuard] },
     { path: 'user-profile',             component: UserProfileComponent,        canActivate: [AuthGuard] },
+    { path: 'help',                     component: HelpComponent },
+    { path: 'faq',                      component: FaqComponent },
+    { path: 'about-us',                 component: AboutUsComponent },
     { path: 'table-list',               component: TableListComponent },
     { path: 'typography',               component: TypographyComponent },
     { path: 'icons',                    component: IconsComponent },

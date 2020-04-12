@@ -40,6 +40,10 @@ import {MatSelectModule} from '@angular/material/select';
 
 import { AuthGuard } from './auth-guard';
 import { LoginComponent } from './login/login.component';
+import { MarkdownModule } from 'angular2-markdown';
+import { HelpComponent } from './help/help.component';
+import { FaqComponent } from './faq/faq.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   imports: [
@@ -57,7 +61,8 @@ import { LoginComponent } from './login/login.component';
     MatTooltipModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    }),
+    MarkdownModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -72,6 +77,9 @@ import { LoginComponent } from './login/login.component';
     EditRepoServerComponent,
     ShowRepoServerComponent,
     LoginComponent,
+    HelpComponent,
+    FaqComponent,
+    AboutUsComponent,
 
   ],
   providers: [AuthGuard, UpgradeComponent],

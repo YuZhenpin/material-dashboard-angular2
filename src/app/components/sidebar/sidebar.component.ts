@@ -11,6 +11,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/builds', title: 'Build Record',  icon:'list', class: '' },
     { path: '/pipelines', title: 'Pipeline',  icon:'playlist_add_check', class: '' },
     { path: '/repo-servers', title: 'Repo Server',  icon:'cloud_queue', class: '' },
+    { path: '/help', title: 'Help',  icon:'help_outline', class: '' },
+    { path: '/faq', title: 'FAQ',  icon:'question_answer', class: '' },
+    { path: '/about-us', title: 'About Us',  icon:'group', class: '' },
     /*
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
     { path: '/login', title: 'Login',  icon:'list', class: '' },
