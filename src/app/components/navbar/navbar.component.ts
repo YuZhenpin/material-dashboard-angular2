@@ -2,7 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { StartupService } from '../../startup.service';
 import { ApiService } from '../../api.service';
+import { Group } from '../../group';
 
 @Component({
   selector: 'app-navbar',
@@ -12,19 +14,24 @@ import { ApiService } from '../../api.service';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
-      mobile_menu_visible: any = 0;
+    mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    searchContent: string;
+    group: Group;
 
     constructor(location: Location,
                 private api: ApiService,
                 private element: ElementRef,
-                private router: Router) {
+                private router: Router,
+                private startup: StartupService ) {
       this.location = location;
           this.sidebarVisible = false;
     }
 
     ngOnInit(){
+    console.log("init nav")
+      this.group= this.startup.startupData;
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -113,7 +120,10 @@ export class NavbarComponent implements OnInit {
         }
     };
 
-    getTitle(){
+    getTitle() {
+        if (this.groupName) {
+            return this.groupName;
+        }
       var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
           titlee = titlee.slice( 1 );
@@ -125,6 +135,12 @@ export class NavbarComponent implements OnInit {
           }
       }
       return 'Dashboard';
+    }
+
+    doSearch() {
+        console.log("do search");
+        console.log(this.searchContent);
+        console.log(document.getElementById('navbarSearchInput').innerText)
     }
 
     onLogout() {
