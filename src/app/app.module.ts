@@ -44,6 +44,14 @@ import { MarkdownModule } from 'angular2-markdown';
 import { HelpComponent } from './help/help.component';
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { APP_INITIALIZER } from '@angular/core';
+
+import { StartupService } from './startup.service';
+
+export function startupServiceFactory(startupService: StartupService): Function {
+  return () => startupService.load();
+}
+
 
 @NgModule({
   imports: [
@@ -82,7 +90,14 @@ import { AboutUsComponent } from './about-us/about-us.component';
     AboutUsComponent,
 
   ],
-  providers: [AuthGuard, UpgradeComponent],
+  providers: [AuthGuard, UpgradeComponent, StartupService,
+    {
+        // Provider for APP_INITIALIZER
+        provide: APP_INITIALIZER,
+        useFactory: startupServiceFactory,
+        deps: [StartupService],
+        multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

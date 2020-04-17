@@ -1,4 +1,4 @@
-export class Build {
+export class Group {
     id: number;
     name: string;
   }

@@ -4,13 +4,30 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, tap, map } from 'rxjs/operators';
 import { User } from './user';
 import { Build } from './build';
+import { Group } from './group';
 import { Pipeline, PipelinePager } from './pipeline';
-import { RepoServer, RepoServerPager } from './repo-server';
+import { GitlabServer, RepoServer, RepoServerPager } from './repo-server';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 const apiUrl = 'http://localhost:10010/api';
+
+const gitlabServer: GitlabServer = {
+  id: 1,
+  name: 'gitlab'
+}
+
+const build: Build = {
+  id: 1,
+  name: 'gitlab'
+}
+
+const group: Group = {
+  id: 1,
+  name: 'group'
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,27 +48,40 @@ export class ApiService {
   }
 
   login(user: User): Observable<boolean> {
-    const url = this.getUrl('login');
-    return this.http.post<{token: string}>(url, user)
-      .pipe(
-        map(result => {
-          localStorage.setItem('access_token', result.token);
-          return true;
-        })
-      );
+    return new Observable((o) => {
+      setTimeout(() => {
+        localStorage.setItem('access_token', "A token :)");
+        o.next(true);
+      }, 1000)
+    })
   }
 
   logout() {
     localStorage.removeItem('access_token');
   }
 
+  getGroup(): Observable<Group> {
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(group);
+      }, 500)
+    })
+  }
+
+  listGitlabServers(): Observable<GitlabServer[]> {
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next([gitlabServer, gitlabServer, gitlabServer]);
+      }, 500)
+    })
+  }
+
   getBuilds(): Observable<Build[]> {
-    const url = this.getUrl('builds');
-    return this.http.get<Build[]>(url)
-      .pipe(
-        tap(builds => console.log('fetched builds')),
-        catchError(this.handleError('getBuilds', []))
-      );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next([build, build, build]);
+      }, 500)
+    })
   }
 
   getPipelines(page: number, pageSize: number): Observable<PipelinePager> {
@@ -114,7 +144,7 @@ export class ApiService {
   addRepoServer(repoServer: RepoServer): Observable<RepoServer> {
     const url = this.getUrl(`repo_servers`);
     return this.http.post<RepoServer>(url, repoServer, httpOptions).pipe(
-      tap((c: Pipeline) => console.log(`added repo server w/ id=${c.id}`)),
+      tap((c: RepoServer) => console.log(`added repo server w/ id=${c.id}`)),
       catchError(this.handleError<RepoServer>('addRepoServer'))
     );
   }
