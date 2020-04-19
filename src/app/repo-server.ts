@@ -1,6 +1,6 @@
 export class RepoServer {
-  id: number;
   name: string;
+  token: string;
 }
 
 export class RepoServerPager {
@@ -11,4 +11,5 @@ export class RepoServerPager {
 export class GitlabServer {
   id: number;
   name: string;
+  url: string;
 }

@@ -1,0 +1,67 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <span class="fill-space"></span>
+            <mat-form-field>
+                <mat-select placeholder="Type" [(ngModel)]="category" 
+                  (selectionChange)="onSelectCategory($event)">
+                  <mat-option value="owned">Owned</mat-option>
+                  <mat-option value="group">Group</mat-option>
+                </mat-select>
+              </mat-form-field> 
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Owned Build Record</h4>
+                        <p class="card-category"> </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        URL
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Elapse
+                                    </th>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let build of builds">
+                                      <td ngDefaultControl [(ngModel)]="build.id">
+                                          {{build.id}}
+                                      </td>
+                                      <td ngDefaultControl [(ngModel)]="build.pipeline.name">
+                                        {{build.pipeline.name}}
+                                    </td>
+                                      <td>
+                                          {{build.queue_id}}
+                                      </td>
+                                      <td>
+                                          {{build.status}}
+                                      </td>
+                                      <td class="text-primary">
+                                          {{build.elapse}} seconds
+                                      </td>
+                                  </tr>
+                                </tbody> 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

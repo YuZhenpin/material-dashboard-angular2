@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from '../api.service';
-import { User } from '../user';
+import { User, LoginUser } from '../user';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { User } from '../user';
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User();
+  user: LoginUser = new LoginUser();
   constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {

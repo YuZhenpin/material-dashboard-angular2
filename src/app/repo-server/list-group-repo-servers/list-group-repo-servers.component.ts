@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from '../../api.service';
-import { Pipeline, PipelinePager } from '../../pipeline';
+import { RepoServer, RepoServerPager } from '../../repo-server';
 
 const PAGE = 1;
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 1
 
 @Component({
-  selector: 'app-list-pipelines',
-  templateUrl: './list-pipelines.component.html',
-  styleUrls: ['./list-pipelines.component.css']
+  selector: 'app-list-group-repo-servers',
+  templateUrl: './list-group-repo-servers.component.html',
+  styleUrls: ['./list-group-repo-servers.component.css']
 })
-
-export class ListPipelinesComponent implements OnInit {
+export class ListGroupRepoServersComponent implements OnInit {
 
   pageSize = PAGE_SIZE;
   currentPage = PAGE;
   totalPages = 1;
-  pager: PipelinePager;
+  pager: RepoServerPager
+  servers: RepoServer[] = [];
   isLoadingResults = true;
 
   constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) { }
@@ -26,7 +26,7 @@ export class ListPipelinesComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.pageSize = params.pageSize ? parseInt(params.pageSize, 10) : PAGE_SIZE;
       this.currentPage = params.page ? parseInt(params.page, 10) : PAGE;
-      this.api.listPipelines(this.currentPage, this.pageSize)
+      this.api.listRepoServers(this.currentPage, this.pageSize)
       .subscribe((res: any) => {
         this.pager = res;
         this.totalPages = Math.ceil(this.pager.total / this.pageSize);
@@ -57,4 +57,5 @@ export class ListPipelinesComponent implements OnInit {
     }
     return true;
   }
+
 }

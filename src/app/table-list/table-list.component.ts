@@ -14,7 +14,7 @@ export class TableListComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.getBuilds()
+    this.api.listBuilds()
     .subscribe((res: any) => {
       this.builds = res;
       this.isLoadingResults = false;

@@ -1,4 +1,11 @@
+import {User} from './user';
+import {Pipeline} from './pipeline';
+
 export class Build {
     id: number;
-    name: string;
+    status: number;
+    elapse: number;
+    queue_id: string;
+    user: User;
+    pipeline: Pipeline;
   }

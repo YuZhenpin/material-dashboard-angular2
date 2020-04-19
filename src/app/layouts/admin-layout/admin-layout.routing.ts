@@ -9,13 +9,16 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
-import { ListBuildsComponent } from '../../build/list-builds/list-builds.component';
+import { ListOwnedBuildsComponent } from '../../build/list-owned-builds/list-owned-builds.component';
+import { ListGroupBuildsComponent } from '../../build/list-group-builds/list-group-builds.component';
 
-import { ListPipelinesComponent } from '../../pipeline/list-pipelines/list-pipelines.component';
+import { ListOwnedPipelinesComponent } from '../../pipeline/list-owned-pipelines/list-owned-pipelines.component';
+import { ListGroupPipelinesComponent } from '../../pipeline/list-group-pipelines/list-group-pipelines.component';
 import { NewPipelineComponent } from '../../pipeline/new-pipeline/new-pipeline.component';
 import { EditPipelineComponent } from '../../pipeline/edit-pipeline/edit-pipeline.component';
 
-import { ListRepoServersComponent} from '../../repo-server/list-repo-servers/list-repo-servers.component';
+import { ListOwnedRepoServersComponent} from '../../repo-server/list-owned-repo-servers/list-owned-repo-servers.component';
+import { ListGroupRepoServersComponent} from '../../repo-server/list-group-repo-servers/list-group-repo-servers.component';
 import { NewRepoServerComponent } from '../../repo-server/new-repo-server/new-repo-server.component';
 import { EditRepoServerComponent } from '../../repo-server/edit-repo-server/edit-repo-server.component';
 
@@ -68,24 +71,26 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'login',                    component: LoginComponent },
-    { path: 'builds',                   component: ListBuildsComponent,         canActivate: [AuthGuard] },
-    { path: 'pipelines',                component: ListPipelinesComponent,      canActivate: [AuthGuard] },
-    { path: 'pipelines',                component: ListPipelinesComponent,      canActivate: [AuthGuard] },
-    { path: 'pipelines/new',            component: NewPipelineComponent,        canActivate: [AuthGuard] },
-    { path: 'pipelines/:id/edit',       component: EditPipelineComponent,       canActivate: [AuthGuard] },
-    { path: 'repo-servers',             component: ListRepoServersComponent,    canActivate: [AuthGuard] },
-    { path: 'repo-servers/new',         component: NewRepoServerComponent ,     canActivate: [AuthGuard] },
-    { path: 'repo-servers/:id/edit',    component: EditRepoServerComponent,     canActivate: [AuthGuard] },
-    { path: 'dashboard',                component: DashboardComponent,          canActivate: [AuthGuard] },
-    { path: 'user-profile',             component: UserProfileComponent,        canActivate: [AuthGuard] },
-    { path: 'help',                     component: HelpComponent },
-    { path: 'faq',                      component: FaqComponent },
-    { path: 'about-us',                 component: AboutUsComponent },
-    { path: 'table-list',               component: TableListComponent },
-    { path: 'typography',               component: TypographyComponent },
-    { path: 'icons',                    component: IconsComponent },
-    { path: 'maps',                     component: MapsComponent },
-    { path: 'notifications',            component: NotificationsComponent },
-    { path: 'upgrade',                  component: UpgradeComponent },
+    { path: 'login',                 component: LoginComponent },
+    { path: 'builds/owned',          component: ListOwnedBuildsComponent,      canActivate: [AuthGuard] },
+    { path: 'builds/group',          component: ListGroupBuildsComponent,      canActivate: [AuthGuard] },
+    { path: 'pipelines/owned',       component: ListOwnedPipelinesComponent,   canActivate: [AuthGuard] },
+    { path: 'pipelines/group',       component: ListGroupPipelinesComponent,   canActivate: [AuthGuard] },
+    { path: 'pipelines/new',         component: NewPipelineComponent,          canActivate: [AuthGuard] },
+    { path: 'pipelines/:id/edit',    component: EditPipelineComponent,         canActivate: [AuthGuard] },
+    { path: 'repo-servers/owned',    component: ListOwnedRepoServersComponent, canActivate: [AuthGuard] },
+    { path: 'repo-servers/group',    component: ListGroupRepoServersComponent, canActivate: [AuthGuard] },
+    { path: 'repo-servers/new',      component: NewRepoServerComponent ,       canActivate: [AuthGuard] },
+    { path: 'repo-servers/:id/edit', component: EditRepoServerComponent,       canActivate: [AuthGuard] },
+    { path: 'dashboard',             component: DashboardComponent,            canActivate: [AuthGuard] },
+    { path: 'user-profile',          component: UserProfileComponent,          canActivate: [AuthGuard] },
+    { path: 'help',                  component: HelpComponent },
+    { path: 'faq',                   component: FaqComponent },
+    { path: 'about-us',              component: AboutUsComponent },
+    { path: 'table-list',            component: TableListComponent },
+    { path: 'typography',            component: TypographyComponent },
+    { path: 'icons',                 component: IconsComponent },
+    { path: 'maps',                  component: MapsComponent },
+    { path: 'notifications',         component: NotificationsComponent },
+    { path: 'upgrade',               component: UpgradeComponent },
 ];

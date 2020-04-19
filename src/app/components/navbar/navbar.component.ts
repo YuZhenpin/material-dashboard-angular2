@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StartupService } from '../../startup.service';
 import { ApiService } from '../../api.service';
 import { Group } from '../../group';
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
                 private api: ApiService,
                 private element: ElementRef,
                 private router: Router,
+                private route: ActivatedRoute,
                 private startup: StartupService ) {
       this.location = location;
           this.sidebarVisible = false;
@@ -121,9 +122,6 @@ export class NavbarComponent implements OnInit {
     };
 
     getTitle() {
-        if (this.groupName) {
-            return this.groupName;
-        }
       var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
           titlee = titlee.slice( 1 );
@@ -139,8 +137,15 @@ export class NavbarComponent implements OnInit {
 
     doSearch() {
         console.log("do search");
-        console.log(this.searchContent);
-        console.log(document.getElementById('navbarSearchInput').innerText)
+        this.router.navigateByUrl('.', { skipLocationChange: true }).then(() => {
+        this.router.navigate(
+            [], 
+            {
+              relativeTo: this.route,
+              queryParams: { myParam: 'myNewValue' },
+              queryParamsHandling: 'merge'
+            });
+        })
     }
 
     onLogout() {

@@ -7,12 +7,11 @@ const PAGE = 1;
 const PAGE_SIZE = 10;
 
 @Component({
-  selector: 'app-list-pipelines',
-  templateUrl: './list-pipelines.component.html',
-  styleUrls: ['./list-pipelines.component.css']
+  selector: 'app-list-owned-pipelines',
+  templateUrl: './list-owned-pipelines.component.html',
+  styleUrls: ['./list-owned-pipelines.component.css']
 })
-
-export class ListPipelinesComponent implements OnInit {
+export class ListOwnedPipelinesComponent implements OnInit {
 
   pageSize = PAGE_SIZE;
   currentPage = PAGE;
@@ -57,4 +56,5 @@ export class ListPipelinesComponent implements OnInit {
     }
     return true;
   }
+
 }

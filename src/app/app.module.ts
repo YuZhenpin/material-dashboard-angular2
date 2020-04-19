@@ -22,8 +22,6 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ListBuildsComponent } from './build/list-builds/list-builds.component';
-import { ListRepoServersComponent } from './repo-server/list-repo-servers/list-repo-servers.component';
 import { ListPipelinesComponent } from './pipeline/list-pipelines/list-pipelines.component';
 import { NewPipelineComponent } from './pipeline/new-pipeline/new-pipeline.component';
 import { EditPipelineComponent } from './pipeline/edit-pipeline/edit-pipeline.component';
@@ -47,6 +45,12 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { APP_INITIALIZER } from '@angular/core';
 
 import { StartupService } from './startup.service';
+import { ListOwnedBuildsComponent } from './build/list-owned-builds/list-owned-builds.component';
+import { ListGroupBuildsComponent } from './build/list-group-builds/list-group-builds.component';
+import { ListOwnedPipelinesComponent } from './pipeline/list-owned-pipelines/list-owned-pipelines.component';
+import { ListGroupPipelinesComponent } from './pipeline/list-group-pipelines/list-group-pipelines.component';
+import { ListOwnedRepoServersComponent } from './repo-server/list-owned-repo-servers/list-owned-repo-servers.component';
+import { ListGroupRepoServersComponent } from './repo-server/list-group-repo-servers/list-group-repo-servers.component';
 
 export function startupServiceFactory(startupService: StartupService): Function {
   return () => startupService.load();
@@ -75,8 +79,6 @@ export function startupServiceFactory(startupService: StartupService): Function 
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    ListBuildsComponent,
-    ListRepoServersComponent,
     ListPipelinesComponent,
     NewPipelineComponent,
     EditPipelineComponent,
@@ -88,6 +90,12 @@ export function startupServiceFactory(startupService: StartupService): Function 
     HelpComponent,
     FaqComponent,
     AboutUsComponent,
+    ListOwnedBuildsComponent,
+    ListGroupBuildsComponent,
+    ListOwnedPipelinesComponent,
+    ListGroupPipelinesComponent,
+    ListOwnedRepoServersComponent,
+    ListGroupRepoServersComponent,
 
   ],
   providers: [AuthGuard, UpgradeComponent, StartupService,

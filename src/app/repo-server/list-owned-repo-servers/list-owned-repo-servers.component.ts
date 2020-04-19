@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from '../../api.service';
-import { RepoServer, RepoServerPager } from '../../repo-server'
+import { RepoServer, RepoServerPager } from '../../repo-server';
 
 const PAGE = 1;
-const PAGE_SIZE = 10
+const PAGE_SIZE = 1
 @Component({
-  selector: 'app-list-repo-servers',
-  templateUrl: './list-repo-servers.component.html',
-  styleUrls: ['./list-repo-servers.component.css']
+  selector: 'app-list-owned-repo-servers',
+  templateUrl: './list-owned-repo-servers.component.html',
+  styleUrls: ['./list-owned-repo-servers.component.css']
 })
-export class ListRepoServersComponent implements OnInit {
+export class ListOwnedRepoServersComponent implements OnInit {
+
   pageSize = PAGE_SIZE;
   currentPage = PAGE;
   totalPages = 1;
@@ -24,7 +25,7 @@ export class ListRepoServersComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.pageSize = params.pageSize ? parseInt(params.pageSize, 10) : PAGE_SIZE;
       this.currentPage = params.page ? parseInt(params.page, 10) : PAGE;
-      this.api.getRepoServers(this.currentPage, this.pageSize)
+      this.api.listRepoServers(this.currentPage, this.pageSize)
       .subscribe((res: any) => {
         this.pager = res;
         this.totalPages = Math.ceil(this.pager.total / this.pageSize);
@@ -55,4 +56,5 @@ export class ListRepoServersComponent implements OnInit {
     }
     return true;
   }
+
 }

@@ -1,0 +1,158 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <a class="nav-link" routerLink="/pipelines/new">
+              <h4 class="card-title"> 
+                  <i class="material-icons">add</i>
+                  Create a new pipeline
+              </h4>
+          </a> 
+          <div class="card">
+              <div class="card-header card-header-tabs card-header-danger">
+                  <div class="nav-tabs-navigation">
+                      <div class="nav-tabs-wrapper">
+                          <ul class="nav nav-tabs" data-tabs="tabs">
+                              <li class="nav-item">
+                                  <a mat-button class="nav-link active" href="#my" data-toggle="tab">
+                                      <i class="material-icons">done</i> My Pipelines
+                                      <div class="ripple-container"></div>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a mat-button class="nav-link" href="#all" data-toggle="tab">
+                                      <i class="material-icons">done_all</i> Team Pipelines 
+                                      <div class="ripple-container"></div>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="tab-content">
+                      <div class="tab-pane active" id="my">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Country
+                                  </th>
+                                  <th>
+                                      City
+                                  </th>
+                                  <th>
+                                      Salary
+                                  </th>
+                              </thead>
+                              <tbody *ngIf="pager">
+                                  <tr *ngFor="let pipeline of pager.pipelines">
+                                      <td ngDefaultControl [(ngModel)]="pipeline.id">
+                                          {{pipeline.id}}
+                                      </td>
+                                      <td ngDefaultControl [(ngModel)]="pipeline.name">
+                                          {{pipeline.name}}
+                                      </td>
+                                      <td>
+                                          Niger
+                                      </td>
+                                      <td>
+                                          Oud-Turnhout
+                                      </td>
+                                      <td class="text-primary">
+                                          <a class="nav-link" routerLink="/pipelines/{{pipeline.id}}/edit">
+                                              <i class="material-icons">edit</i>
+                                          </a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="tab-pane" id="all">
+                          <table class="table">
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <div class="form-check">
+                                              <label class="form-check-label">
+                                                  <input class="form-check-input" type="checkbox" value="" checked>
+                                                  <span class="form-check-sign">
+                                                      <span class="check"></span>
+                                                  </span>
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td>Flooded: One year later, assessing what was lost and what was found when a
+                                          ravaging rain swept through metro Detroit
+                                      </td>
+                                      <td class="td-actions text-right">
+                                          <button mat-raised-button type="button" matTooltip="Edit Task"
+                                              [matTooltipPosition]="'above'"
+                                              class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                              <i class="material-icons">edit</i>
+                                          </button>
+                                          <button mat-raised-button type="button" matTooltip="Remove"
+                                              [matTooltipPosition]="'above'"
+                                              class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                              <i class="material-icons">close</i>
+                                          </button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div class="form-check">
+                                              <label class="form-check-label">
+                                                  <input class="form-check-input" type="checkbox" value="">
+                                                  <span class="form-check-sign">
+                                                      <span class="check"></span>
+                                                  </span>
+                                              </label>
+                                          </div>
+                                      </td>
+                                      <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                      <td class="td-actions text-right">
+                                          <button mat-raised-button type="button" matTooltip="Edit Task"
+                                              [matTooltipPosition]="'above'"
+                                              class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                              <i class="material-icons">edit</i>
+                                          </button>
+                                          <button mat-raised-button type="button" matTooltip="Remove"
+                                              [matTooltipPosition]="'above'"
+                                              class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                              <i class="material-icons">close</i>
+                                          </button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <ul *ngIf="pager" class="pagination">
+              <a class="nav-link" *ngIf="!isFirstPage()"
+                  routerLink="/pipelines" [queryParams]="pageQueryParams(1)">
+                  <i class="material-icons">first_page</i>
+              </a> 
+              <a class="nav-link" *ngIf="!isFirstPage()"
+                  routerLink="/pipelines" [queryParams]="pageQueryParams(currentPage - 1)">
+                  <i class="material-icons">chevron_left</i>
+              </a>
+              <input matInput (keypress)="numberOnly($event)">
+              <a class="nav-link" *ngIf="!isLastPage()"
+                  routerLink="/pipelines" [queryParams]="pageQueryParams(currentPage + 1)">
+                  <i class="material-icons">chevron_right</i>
+              </a> 
+              <a class="nav-link" *ngIf="!isLastPage()"
+                  routerLink="/pipelines" [queryParams]="pageQueryParams(totalPages)">
+                  <i class="material-icons">last_page</i>
+              </a> 
+          </ul>
+      </div>
+  </div>
+</div>

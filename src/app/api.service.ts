@@ -15,12 +15,17 @@ const apiUrl = 'http://localhost:10010/api';
 
 const gitlabServer: GitlabServer = {
   id: 1,
-  name: 'gitlab'
+  name: 'gitlab',
+  url: 'http://gitlab.com'
 }
 
 const build: Build = {
   id: 1,
-  name: 'gitlab'
+  queue_id: 'uuid',
+  status: 1,
+  elapse: 100,
+  user: { username: 'pin' },
+  pipeline: {id: 1, name: 'pipeline1'}
 }
 
 const group: Group = {
@@ -76,7 +81,7 @@ export class ApiService {
     })
   }
 
-  getBuilds(): Observable<Build[]> {
+  listBuilds(): Observable<Build[]> {
     return new Observable((o) => {
       setTimeout(() => {
         o.next([build, build, build]);
@@ -84,7 +89,7 @@ export class ApiService {
     })
   }
 
-  getPipelines(page: number, pageSize: number): Observable<PipelinePager> {
+  listPipelines(page: number, pageSize: number): Observable<PipelinePager> {
     const url = this.getUrl('pipelines');
     return this.http.get<PipelinePager>(url).pipe(
       tap(_ => console.log(`fetched pipelines`)),
@@ -100,7 +105,7 @@ export class ApiService {
     );
   }
 
-  addPipeline(pipeline: Pipeline): Observable<Pipeline> {
+  createPipeline(pipeline: Pipeline): Observable<Pipeline> {
     const url = this.getUrl(`pipelines`);
     return this.http.post<Pipeline>(url, pipeline, httpOptions).pipe(
       tap((c: Pipeline) => console.log(`added pipeline w/ id=${c.id}`)),
@@ -124,7 +129,7 @@ export class ApiService {
     );
   }
 
-  getRepoServers(page: number, pageSize: number): Observable<RepoServerPager> {
+  listRepoServers(page: number, pageSize: number): Observable<RepoServerPager> {
     const url = this.getUrl(`repo_servers`);
     return this.http.get<RepoServerPager>(url)
       .pipe(
@@ -141,10 +146,10 @@ export class ApiService {
     );
   }
 
-  addRepoServer(repoServer: RepoServer): Observable<RepoServer> {
+  createRepoServer(repoServer: RepoServer): Observable<RepoServer> {
     const url = this.getUrl(`repo_servers`);
     return this.http.post<RepoServer>(url, repoServer, httpOptions).pipe(
-      tap((c: RepoServer) => console.log(`added repo server w/ id=${c.id}`)),
+      tap((c: RepoServer) => console.log(`added repo server w/ id=${c.name}`)),
       catchError(this.handleError<RepoServer>('addRepoServer'))
     );
   }

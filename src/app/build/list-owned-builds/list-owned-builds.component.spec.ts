@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListRepoServersComponent } from './list-repo-servers.component';
+import { ListOwnedBuildsComponent } from './list-owned-builds.component';
 
-describe('ListRepoServersComponent', () => {
-  let component: ListRepoServersComponent;
-  let fixture: ComponentFixture<ListRepoServersComponent>;
+describe('ListOwnedBuildsComponent', () => {
+  let component: ListOwnedBuildsComponent;
+  let fixture: ComponentFixture<ListOwnedBuildsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListRepoServersComponent ]
+      declarations: [ ListOwnedBuildsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListRepoServersComponent);
+    fixture = TestBed.createComponent(ListOwnedBuildsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListBuildsComponent } from './list-builds.component';
+import { ListOwnedPipelinesComponent } from './list-owned-pipelines.component';
 
-describe('ListBuildsComponent', () => {
-  let component: ListBuildsComponent;
-  let fixture: ComponentFixture<ListBuildsComponent>;
+describe('ListOwnedPipelinesComponent', () => {
+  let component: ListOwnedPipelinesComponent;
+  let fixture: ComponentFixture<ListOwnedPipelinesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListBuildsComponent ]
+      declarations: [ ListOwnedPipelinesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListBuildsComponent);
+    fixture = TestBed.createComponent(ListOwnedPipelinesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
