@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, pipe } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { User } from './user';
@@ -15,9 +15,25 @@ const apiUrl = 'http://localhost:10010/api';
 
 const gitlabServer: GitlabServer = {
   id: 1,
+  type: 'gitlab',
   name: 'gitlab',
   url: 'http://gitlab.com'
 }
+
+const repoServer: RepoServer = {
+  id: 1,
+  type: 'gitlab',
+  name: 'gitlab',
+  url: 'http://gitlab.com',
+  token: 'token'
+}
+
+const pipeline: Pipeline = {
+  id: 1, 
+  name: 'pipeline1',
+  repo_server: repoServer
+}
+
 
 const build: Build = {
   id: 1,
@@ -25,11 +41,16 @@ const build: Build = {
   status: 1,
   elapse: 100,
   user: { username: 'pin' },
-  pipeline: {id: 1, name: 'pipeline1'}
+  pipeline: pipeline
 }
 
+const user: User = {
+  username: 'yzp',
+}
+
+
 const group: Group = {
-  id: 1,
+  id: 'uuid',
   name: 'group'
 }
 
@@ -90,84 +111,83 @@ export class ApiService {
   }
 
   listPipelines(page: number, pageSize: number): Observable<PipelinePager> {
-    const url = this.getUrl('pipelines');
-    return this.http.get<PipelinePager>(url).pipe(
-      tap(_ => console.log(`fetched pipelines`)),
-      catchError(this.handleError<PipelinePager>(`getPipelines`))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next({total: 2, pipelines: [pipeline, pipeline]});
+      }, 500)
+    })
   }
 
   getPipelineById(id: number): Observable<Pipeline> {
-    const url = this.getUrl(`pipelines/${id}`);
-    return this.http.get<Pipeline>(url).pipe(
-      tap(_ => console.log(`fetched pipeline id=${id}`)),
-      catchError(this.handleError<Pipeline>(`getPipelineById id=${id}`))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(pipeline);
+      }, 500)
+    })
   }
 
   createPipeline(pipeline: Pipeline): Observable<Pipeline> {
-    const url = this.getUrl(`pipelines`);
-    return this.http.post<Pipeline>(url, pipeline, httpOptions).pipe(
-      tap((c: Pipeline) => console.log(`added pipeline w/ id=${c.id}`)),
-      catchError(this.handleError<Pipeline>('addPipeline'))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(pipeline);
+      }, 500)
+    })
   }
 
   updatePipeline(id: number, pipeline: Pipeline): Observable<any> {
-    const url = this.getUrl(`pipelines/${id}`);
-    return this.http.put(url, pipeline, httpOptions).pipe(
-      tap(_ => console.log(`updated pipeline id=${id}`)),
-      catchError(this.handleError<any>('updatePipeline'))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(pipeline);
+      }, 500)
+    })
   }
 
   deletePipeline(id: number): Observable<Pipeline> {
-    const url = this.getUrl(`pipelines/${id}`);
-    return this.http.delete<Pipeline>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted pipeline id=${id}`)),
-      catchError(this.handleError<Pipeline>('deletePipeline'))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(pipeline);
+      }, 500)
+    })
   }
 
   listRepoServers(page: number, pageSize: number): Observable<RepoServerPager> {
-    const url = this.getUrl(`repo_servers`);
-    return this.http.get<RepoServerPager>(url)
-      .pipe(
-        tap(repoServer => console.log('fetched repo servers')),
-        catchError(this.handleError<RepoServerPager>('getRepoServers'))
-      );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next({total: 2, repo_servers: [repoServer]});
+      }, 500)
+    })
   }
 
   getRepoServerById(id: number): Observable<RepoServer> {
-    const url = this.getUrl(`repo_servers/${id}`);
-    return this.http.get<RepoServer>(url).pipe(
-      tap(_ => console.log(`fetched repo server id=${id}`)),
-      catchError(this.handleError<RepoServer>(`getRepoServerById id=${id}`))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(repoServer);
+      }, 500)
+    })
   }
 
   createRepoServer(repoServer: RepoServer): Observable<RepoServer> {
-    const url = this.getUrl(`repo_servers`);
-    return this.http.post<RepoServer>(url, repoServer, httpOptions).pipe(
-      tap((c: RepoServer) => console.log(`added repo server w/ id=${c.name}`)),
-      catchError(this.handleError<RepoServer>('addRepoServer'))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(repoServer);
+      }, 500)
+    })
   }
 
   updateRepoServer(id: number, repoServer: RepoServer): Observable<any> {
-    const url = this.getUrl(`repo_servers/${id}`);
-    return this.http.put(url, repoServer, httpOptions).pipe(
-      tap(_ => console.log(`updated repo server id=${id}`)),
-      catchError(this.handleError<any>('updateRepoServer'))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(repoServer);
+      }, 500)
+    })
   }
 
   deleteRepoServer(id: number): Observable<RepoServer> {
-    const url = this.getUrl(`repo_servers/${id}`);
-    return this.http.delete<RepoServer>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted repo server id=${id}`)),
-      catchError(this.handleError<RepoServer>('deleteRepoServer'))
-    );
+    return new Observable((o) => {
+      setTimeout(() => {
+        o.next(repoServer);
+      }, 500)
+    })
   }
 
   private getUrl(path: string) {

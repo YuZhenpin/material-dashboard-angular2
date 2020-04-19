@@ -1,4 +1,7 @@
 export class RepoServer {
+  id: number;
+  url: string;
+  type: string;
   name: string;
   token: string;
 }
@@ -10,6 +13,7 @@ export class RepoServerPager {
 
 export class GitlabServer {
   id: number;
-  name: string;
   url: string;
+  type: string;
+  name: string;
 }
